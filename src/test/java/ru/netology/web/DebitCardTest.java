@@ -38,19 +38,6 @@ public class DebitCardTest {
     }
 
     @Test
-    void shouldTestV1() {
-        List<WebElement> textFields = driver.findElements(By.className("input__control"));
-        textFields.get(0).sendKeys("Иванов Иван");
-        textFields.get(1).sendKeys("+70010010203");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.className("button")).click();
-        WebElement messageElement = driver.findElement(cssSelector("[data-test-id=order-success]"));
-        String actualMessage = messageElement.getText();
-        String expectedMessage = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        Assertions.assertEquals(expectedMessage, actualMessage.strip());
-    }
-
-    @Test
     void shouldTestWithCssSelector() {
         driver.findElement(cssSelector("[type=text]")).sendKeys("Иванов Иван");
         driver.findElement(cssSelector("[type=tel]")).sendKeys("+79998887766");
@@ -110,30 +97,6 @@ public class DebitCardTest {
         Assertions.assertEquals(expectedMessage, actualMessage.strip());
     }
 
-
-    @Test
-    void shouldTestUnacceptableName() {
-        driver.findElement(cssSelector("[type=text]")).sendKeys("Иванов Фффф");
-        driver.findElement(cssSelector("[type=tel]")).sendKeys("+79999999999");
-        driver.findElement(cssSelector(".checkbox")).click();
-        driver.findElement(cssSelector("button")).click();
-        WebElement messageElement = driver.findElement(cssSelector("[data-test-id=name] .input__sub]"));
-        String actualMessage = messageElement.getText();
-        String expectedMessage = "Поле обязательно для заполнения";
-        Assertions.assertEquals(expectedMessage, actualMessage.strip());
-    }
-
-    @Test
-    void shouldTestUnacceptableSurname() {
-        driver.findElement(cssSelector("[type=text]")).sendKeys("Ффффф Иван");
-        driver.findElement(cssSelector("[type=tel]")).sendKeys("+79999999999");
-        driver.findElement(cssSelector(".checkbox")).click();
-        driver.findElement(cssSelector("button")).click();
-        WebElement messageElement = driver.findElement(cssSelector("[data-test-id=name] .input__sub]"));
-        String actualMessage = messageElement.getText();
-        String expectedMessage = "Поле обязательно для заполнения";
-        Assertions.assertEquals(expectedMessage, actualMessage.strip());
-    }
 
     @Test
     void shouldTestMaxLetters() {
